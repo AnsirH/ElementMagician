@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: da9310fc7bca41b46adbe59695a93236
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - FireHit: {fileID: 5213443399929633460, guid: 862dea7249d7bc24293ef37335b5ace9,
+      type: 3}
+  - WaterHit: {fileID: 7454594187674200913, guid: 6c160ba58560186418515b33a40ed1a6,
+      type: 3}
+  - ThunderHit: {fileID: 284678563371119511, guid: 54d46bc3f15ff204ea5d60111a3c18b1,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
