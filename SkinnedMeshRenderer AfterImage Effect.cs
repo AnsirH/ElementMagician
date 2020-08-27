@@ -57,16 +57,24 @@ public class Afterimage : MonoBehaviour{
     }
   }
   
+  
   IEnumerator FadeOut(float time)
   {
+    // time이 0이상인 경우 반복
     while(time > 0f)
     {
+      // time이 감소하도록 합니다.
       time -= Time.deltaTime;
+      
+      // 메터리얼 m의 알파값을 줄여줍니다.
       m.color = new Color(m.color.r, m.color.g, m.color.b, originAlpha * time);
       yield return null;
     }
     
+    // 오브젝트를 비활성화합니다.
     gameObject.SetActive(false);
+    
+    // fadeoutCoroutine을 비워줍니다.
     fadeoutCoroutine = null;
   }
 }
