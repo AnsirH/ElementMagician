@@ -5,7 +5,7 @@ using UnityEngine;
 public class SMRAfterImageCreator : MonoBehaviour
 {
   [SerializeField]
-  Material afterImageMeterial;
+  Material afterImageMaterial;
   
   SkinnedMeshRenderer smr;
   Afterimage[] afterImages;
@@ -14,7 +14,7 @@ public class SMRAfterImageCreator : MonoBehaviour
   int currentAfterImageIndex;
   float remainAfterImageTime;
   float createAfterImageDelay;
-  Coroutine creatAfterImageCoroutine = null;
+  Coroutine createAfterImageCoroutine = null;
   
   bool isCreating = false;
   
@@ -42,7 +42,7 @@ public class SMRAfterImageCreator : MonoBehaviour
     afterImages = new Afterimage[afterImageCount];
     
     
-    fot (int i = 0; i < afterImages.Length; i++)
+    for (int i = 0; i < afterImages.Length; i++)
     {
       // 오브젝트 newObj를 만듭니다.
       GameObject newObj = new GameObject();
@@ -61,7 +61,7 @@ public class SMRAfterImageCreator : MonoBehaviour
     if(flag)
     {
       if(createAfterImageCoroutine == null)
-        creatAfterImageCoroutine = StartCoroutine(CreateAfterImageCoroutine());
+        createAfterImageCoroutine = StartCoroutine(CreateAfterImageCoroution());
     }
   }
   
@@ -75,7 +75,7 @@ public class SMRAfterImageCreator : MonoBehaviour
       if (t >= createAfterImageDelay)
       {
         smr.BakeMesh(afterImages[currentAfterImageIndex].mesh);
-        afterImages[currentAfterImageIndex].CreateAfterImage(tranform.position, transform.rotation, remainAfterImageTime);
+        afterImages[currentAfterImageIndex].CreateAfterImage(transform.position, transform.rotation, remainAfterImageTime);
         currentAfterImageIndex = (currentAfterImageIndex + 1) % afterImageCount;
         t -= createAfterImageDelay;
       }

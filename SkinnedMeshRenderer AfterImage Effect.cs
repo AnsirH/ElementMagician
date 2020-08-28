@@ -38,7 +38,7 @@ public class Afterimage : MonoBehaviour{
   public void CreateAfterImage(Vector3 position, Quaternion rot, float time)
   { 
     // fadeoutCoroutine에 값이 없을 때 실행합니다.1
-    if ( fadeoutCoroutine == null ) 
+    if ( fadeOutCoroutine == null ) 
     {
       // 오브젝트를 활성화 합니다.
       gameObject.SetActive(true);
@@ -53,7 +53,7 @@ public class Afterimage : MonoBehaviour{
       mf.mesh = mesh;
       
       // fadeoutCoroutine에 FadeOut코루틴을 넣어줍니다.
-      fadeoutCoroutine = StartCotoutine(FadeOut(time));
+      fadeOutCoroutine = StartCoroutine(FadeOut(time));
     }
   }
   
@@ -75,6 +75,6 @@ public class Afterimage : MonoBehaviour{
     gameObject.SetActive(false);
     
     // fadeoutCoroutine을 비워줍니다.
-    fadeoutCoroutine = null;
+    fadeOutCoroutine = null;
   }
 }
