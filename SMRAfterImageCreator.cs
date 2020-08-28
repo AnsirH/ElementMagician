@@ -13,7 +13,7 @@ public class SMRAfterImageCreator : MonoBehaviour
   int afterImageCount;
   int currentAfterImageIndex;
   float remainAfterImageTime;
-  float creatAfterImageDelay;
+  float createAfterImageDelay;
   Coroutine creatAfterImageCoroutine = null;
   
   bool isCreating = false;
@@ -30,13 +30,13 @@ public class SMRAfterImageCreator : MonoBehaviour
     remainAfterImageTime = remainTime;
     
     // 잔상 생성 딜레이를 설정합니다.
-    creatAfterImageDelay = remainAfterImageTime / (float)afterImageCount + 0.1f;
+    createAfterImageDelay = remainAfterImageTime / (float)afterImageCount + 0.1f;
     
     // 잔상을 만드는 함수를 호출합니다.
-    CreatAfterImages();
+    CreateAfterImages();
   }
   
-  void CreatAfterImages()
+  void CreateAfterImages()
   {
     // 잔상을 afterImageCount 수만큼 생성합니다.
     afterImages = new Afterimage[afterImageCount];
@@ -55,5 +55,34 @@ public class SMRAfterImageCreator : MonoBehaviour
     }
   }
   
+  public void Create(bool flag)
+  {
+    this.isCreating = flag;
+    if(flag)
+    {
+      if(createAfterImageCoroutine == null)
+        creatAfterImageCoroutine = StartCoroutine(CreateAfterImageCoroutine());
+    }
+  }
+  
+  IEnumerator CreateAfterImageCoroution()
+  {
+    float t = 0f;
+    while(isCreating)
+    {
+      t += Time.deltaTime;
+      
+      if (t >= createAfterImageDelay)
+      {
+        smr.BakeMesh(afterImages[currentAfterImageIndex].mesh);
+        afterImages[currentAfterImageIndex].CreateAfterImage(tranform.position, transform.rotation, remainAfterImageTime);
+        currentAfterImageIndex = (currentAfterImageIndex + 1) % afterImageCount;
+        t -= createAfterImageDelay;
+      }
+      yield return null;
+    }
+    
+    createAfterImageCoroutine = null;
+  }
   
 }
